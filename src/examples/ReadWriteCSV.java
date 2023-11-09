@@ -22,7 +22,7 @@ public class ReadWriteCSV {
     // Read the file and manipulate
     String line; // create local variable
     String[] columns;
-    List<String[]> newExchangeRate = new ArrayList<>(); // Temporary variable to store our new files, will call toString() at the end.
+    List<String[]> newExchangeRate = new ArrayList<>(); // Temporary variable to store our new file, will process in FileWriter.
 
     // Read column headers and update to our ArrayList
     columns = br.readLine().split(",");
@@ -46,11 +46,14 @@ public class ReadWriteCSV {
 
     try {
       FileWriter myWriter = new FileWriter("newExchangeRate.csv");
+      // for each column in each row, append to writer
       for (String[] rows : newExchangeRate) {
         for (int i = 0; i < rows.length; i++) {
           myWriter.append(rows[i]);
+          // add comma until second last word
           if (i < (rows.length - 1)) myWriter.append(",");
         }
+        // append new line
         myWriter.append(System.lineSeparator());
       }
       myWriter.close();
